@@ -320,6 +320,39 @@ var MathImg = /** @class */ (function () {
         }
         return sal;
     };
+    
+    
+    
+    MathImg.toescalaGrisess = function (img, umbral) {
+        // Variable que guarda el arreglo 3D de la imagen de color
+        var arrImage = img.getArrayImg();
+        // Variable donde guardamos la salida
+        var sal = this.initArray(img.getWidth(), img.getHeight());
+        var prom;
+    
+        for (var i = 0; i < img.getHeight(); i++) {
+            for (var j = 0; j < img.getWidth(); j++) {
+                prom = (arrImage[0][i][j] + arrImage[1][i][j] + arrImage[2][i][j]) / 3;
+    
+                // Realce de la imagen (filtro gris)
+                sal[0][i][j] = prom;
+                sal[1][i][j] = prom;
+                sal[2][i][j] = prom;
+    
+                // Ajuste para hacer más claro (umbral positivo)
+                if (umbral > 0) {
+                    sal[0][i][j] = Math.min(255, sal[0][i][j] + umbral);
+                    sal[1][i][j] = Math.min(255, sal[1][i][j] + umbral);
+                    sal[2][i][j] = Math.min(255, sal[2][i][j] + umbral);
+                }
+            }
+        }
+    
+        return sal;
+    };
+    
+    
+
     MathImg.changeBrightness = function (img, factor) {
         var arrImage = img.getArrayImg();
         var sal = this.initArray(img.getWidth(), img.getHeight());

@@ -107,6 +107,15 @@ function umbral2limites(evt: any): void{
     var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
     imagenSal.imageArray2DtoData(pantalla2, MathImg.toUmbral2limites(imagenSal, rangos));
 }
+
+
+function escalaDeGrisess(evt: any): void{
+  var args = prompt('Ingresa el valor del umbral');
+  var umbral = parseFloat(args);
+  var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.toescalaGrisess(imagenSal, umbral));
+}
+
 function changeBrightness(evt: any): void {
     var factor = prompt ("Ingresa un valor en el rango de 0-2, como un porcentaje");
     var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
@@ -447,6 +456,7 @@ document.getElementById("op-tricolor-H").addEventListener('click', convertirTric
 document.getElementById("op-gamma").addEventListener('click', correccionGamma, false);
 document.getElementById("op-umbral1").addEventListener('click', umbralizado, false);
 document.getElementById("op-umbral-2-limites").addEventListener('click', umbral2limites, false);
+document.getElementById("op-escalagris").addEventListener('click', escalaDeGrisess, false);
 document.getElementById("op-desfaseX").addEventListener('click', desfaseX, false);
 document.getElementById("op-desfaseY").addEventListener('click', desfaseY, false);
 document.getElementById("op-desfaseD").addEventListener('click', desfaseD, false);

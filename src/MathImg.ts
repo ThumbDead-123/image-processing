@@ -333,6 +333,37 @@ export class MathImg {
     }
     return sal;
   }
+ 
+
+  public static toescalaGrisess(img: ImageType, umbral: number): number[][][] {
+    // Variable que guarda el arreglo 3D de la imagen de color
+    var arrImage: number[][][] = img.getArrayImg();
+    // Variable donde guardamos la salida
+    var sal: number[][][] = this.initArray(img.getWidth(), img.getHeight());
+    var prom: number;
+
+    for (let i = 0; i < img.getHeight(); i++) {
+      for (let j = 0; j < img.getWidth(); j++) {
+        prom = (arrImage[0][i][j] + arrImage[1][i][j] + arrImage[2][i][j]) / 3;
+
+        // Realce de la imagen (filtro gris)
+        sal[0][i][j] = prom;
+        sal[1][i][j] = prom;
+        sal[2][i][j] = prom;
+
+        // Ajuste para hacer más claro (umbral positivo)
+        if (umbral > 0) {
+          sal[0][i][j] = Math.min(255, sal[0][i][j] + umbral);
+          sal[1][i][j] = Math.min(255, sal[1][i][j] + umbral);
+          sal[2][i][j] = Math.min(255, sal[2][i][j] + umbral);
+        }
+      }
+    }
+
+    return sal;
+}
+
+
 
   public static changeBrightness(img: ImageType, factor: number): number[][][] {
     var arrImage: number[][][] = img.getArrayImg();
